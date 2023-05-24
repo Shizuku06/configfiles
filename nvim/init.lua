@@ -1,17 +1,21 @@
-require("mulabeg.plugins-setup")
-require("mulabeg.core.options")
-require("mulabeg.core.keymaps")
-require("mulabeg.core.colorscheme")
-require("mulabeg.plugins.comment")
-require("mulabeg.plugins.nvim-tree")
-require("mulabeg.plugins.lualine")
-require("mulabeg.plugins.telescope")
-require("mulabeg.plugins.nvim-cmp")
-require("mulabeg.plugins.lsp.mason")
-require("mulabeg.plugins.lsp.lspsaga")
-require("mulabeg.plugins.lsp.lspconfig")
-require("mulabeg.plugins.lsp.null-ls")
-require("mulabeg.plugins.autopairs")
-require("mulabeg.plugins.treesitter")
-require("mulabeg.plugins.gitsigns")
+require "core"
 
+local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
+
+if custom_init_path then
+  dofile(custom_init_path)
+end
+
+require("core.utils").load_mappings()
+
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+-- bootstrap lazy.nvim!
+if not vim.loop.fs_stat(lazypath) then
+  require("core.bootstrap").gen_chadrc_template()
+  require("core.bootstrap").lazy(lazypath)
+end
+
+dofile(vim.g.base46_cache .. "defaults")
+vim.opt.rtp:prepend(lazypath)
+require "plugins"

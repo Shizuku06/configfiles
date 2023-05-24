@@ -9,7 +9,7 @@ alt - g: yabai -m display --focus east
 
 ctrl + shift - j : yabai -m display --focus south
 ctrl + shift - k : yabai -m display --focus north
-ctrl + shift - j : yabai -m display --focus east
+ctrl + shift - l : yabai -m display --focus east
 ctrl + shift - h : yabai -m display --focus west
 
 shift + alt - r : yabai -m space --rotate 270
